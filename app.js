@@ -3,6 +3,19 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
+
+//connecting to the mongo database
+mongoose.connect(
+'mongodb+srv://amrit:Amrit.1313@surveycluster-vxm02.mongodb.net/test?retryWrites=true', 
+    { useNewUrlParser: true }
+);
+ 
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Connection Error'));
+db.once('open', function(callback) {
+    console.log('Connected to mongodb');
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -21,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/questions', require('./routes/questions'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
