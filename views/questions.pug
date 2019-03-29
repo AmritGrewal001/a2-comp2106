@@ -3,6 +3,12 @@ extends layout
 block content
     .container
         h1 Questions Page
+        a.btn.mb-5.btn-primary(href="/questions/create") Create Question Here
         
-        each question in quetsions
-            h3= question.title
+        each question in questions
+            .card.mb-5
+                .card-body
+                    h3= question.title
+                    a.btn.btn-warning(href=`/questions/edit/${question.id}`) Edit Question
+                    a.btn.btn-danger(href=`/questions/delete/${question.id}`) Delete Question
+                    h6= question.answer

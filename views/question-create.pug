@@ -1,0 +1,11 @@
+extends layout
+
+block content
+ .container   
+   h1 Create a Question 
+   form(method="post")
+    .input-group.mb-3
+        input.form-control(name="title", placeholder="Input Question Here")
+    .input-group.mb-3
+        input.form-control(name="answer", placeholder="Enter Answer Here")
+    button.btn.btn-success(type="submit") Submit
